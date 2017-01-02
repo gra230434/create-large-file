@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-import urllib
 import zipfile
-import string
 import random
 from shutil import rmtree
 from tqdm import tqdm
@@ -13,7 +11,7 @@ class create_files:
 
     def __init__(self):
         """ init class """
-        self.rootfolder = os.path.join('/', 'nfs')
+        self.rootfolder = os.path.join(os.path.sep, 'nfs')
         if not os.path.isdir(self.rootfolder):
             os.makedirs(self.rootfolder)
 
