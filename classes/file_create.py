@@ -11,8 +11,9 @@ class create_files:
 
     def __init__(self, *path):
         """ init class """
+        self.rootfolder = os.path.join(os.path.sep)
         for value in path:
-            self.rootfolder = os.path.join(os.path.sep, value)
+            self.rootfolder = os.path.join(self.rootfolder, value)
         print self.rootfolder
         if not os.path.isdir(self.rootfolder):
             os.makedirs(self.rootfolder)
