@@ -13,6 +13,7 @@ class create_files:
         """ init class """
         for value in path:
             self.rootfolder = os.path.join(os.path.sep, value)
+        print self.rootfolder
         if not os.path.isdir(self.rootfolder):
             os.makedirs(self.rootfolder)
 
