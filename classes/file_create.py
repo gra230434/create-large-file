@@ -9,9 +9,10 @@ from tqdm import tqdm
 
 class create_files:
 
-    def __init__(self):
+    def __init__(self, *path):
         """ init class """
-        self.rootfolder = os.path.join(os.path.sep, 'nfs')
+        for value in path:
+            self.rootfolder = os.path.join(os.path.sep, value)
         if not os.path.isdir(self.rootfolder):
             os.makedirs(self.rootfolder)
 
