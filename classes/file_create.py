@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 import os
 import zipfile
-import random
+import multiprocessing
 from shutil import rmtree
 from tqdm import tqdm
 """all files will be created in afilesdata folder"""
+
+
+def writetofile(filename, inputsize):
+    bigfile = open(filename, 'wb')
+    bigfile.write(os.urandom(inputsize))
+    bigfile.close()
 
 
 class create_files:
@@ -44,19 +50,21 @@ class create_files:
     def CreateFile(self, number=1):
         size = int(self.filesize)
         if self.unit == 'KB':
-            createsize = size*1024
+            create = 1024
         elif self.unit == 'MB':
-            createsize = size*1048576
+            create = 1048576
         elif self.unit == 'GB':
-            createsize = size*1073741824
+            create = 1073741824
         else:
             return 'FAIL'
         for value in tqdm(range(int(number))):
             filename = 'rand_%d.file' % (value)
             destfile = os.path.join(self.folder, filename)
-            if not os.path.isfile(destfile):
-                with open(destfile, 'wb') as fount:
-                    fount.write(os.urandom(createsize))
+            for i in range(size):
+                the_proc = multiprocessing.Process(target=writetofile,
+                                                   args=((destfile), (create)))
+                the_proc.start()
+                the_proc.join()
         print('Create files success')
         return 'PASS'
 
