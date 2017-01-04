@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import zipfile
 import random
 import multiprocessing
 from shutil import rmtree
@@ -70,45 +69,15 @@ class create_files:
         return 'PASS'
 
     def CreateRandomFile(self, number=1):
-        size = round(random.uniform(0.5, 3), 2) * 1024
-        create = 1024
+        size = round(random.uniform(0.5, 3.1), 2) * 10
+        create = 1024*103
         for value in tqdm(range(int(number))):
             filename = 'rand_%d.file' % (value)
             destfile = os.path.join(self.folder, filename)
-            for i in range(size):
+            for i in range(int(size)):
                 the_proc = multiprocessing.Process(target=writetofile,
                                                    args=((destfile), (create)))
                 the_proc.start()
                 the_proc.join()
         print('Create files success')
         return 'PASS'
-
-    def CreateZIPBegin(self, zipfile='zipdata'):
-        self.zipfile = os.path.join(self.rootfolder, zipfile)
-
-    def RmZIPFile(self, run='on'):
-        if run == 'on':
-            if os.path.exists(self.zipfolder):
-                rmtree(self.zipfolder)
-            if not os.path.isdir(self.zipfolder):
-                os.makedirs(self.zipfolder)
-        return True
-
-    def zipfiles(self):
-        count = 1
-        suffixname = '_0'
-        filename = 'rand' + str(suffixname) + '.file'
-        zippath = os.path.join(self.zipfolder, filename)
-        while os.path.isfile(zippath):
-            suffixname = '_' + str(count)
-            filename = 'rand_' + str(suffixname) + '.file'
-            zippath = os.path.join(self.zipfolder, filename)
-            count += 1
-        zf = zipfile.ZipFile(zippath, mode='w',
-                             compression=zipfile.ZIP_DEFLATED, allowZip64=True)
-        for root, folders, files in os.walk(self.initfolder):
-            for sfile in files:
-                aFile = os.path.join(root, sfile)
-                zf.write(aFile)
-        zf.close()
-        return self.zipfolder
