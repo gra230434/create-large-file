@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import zipfile
+import random
 import multiprocessing
 from shutil import rmtree
 from tqdm import tqdm
@@ -57,6 +58,20 @@ class create_files:
             create = 1073741824
         else:
             return 'FAIL'
+        for value in tqdm(range(int(number))):
+            filename = 'rand_%d.file' % (value)
+            destfile = os.path.join(self.folder, filename)
+            for i in range(size):
+                the_proc = multiprocessing.Process(target=writetofile,
+                                                   args=((destfile), (create)))
+                the_proc.start()
+                the_proc.join()
+        print('Create files success')
+        return 'PASS'
+
+    def CreateRandomFile(self, number=1):
+        size = round(random.uniform(0.5, 3), 2) * 1024
+        create = 1024
         for value in tqdm(range(int(number))):
             filename = 'rand_%d.file' % (value)
             destfile = os.path.join(self.folder, filename)
