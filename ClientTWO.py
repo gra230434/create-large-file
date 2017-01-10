@@ -3,12 +3,10 @@ import time
 
 
 def wait_file_exit(filename, path):
-    exit = False
-    path = os.path.join(path, filename)
+    filepath = os.path.join(path, filename)
     millis1 = int(round(time.time() * 1000))
-    while exit is False:
-        if os.path.isfile(path):
-            exit = True
+    while not os.path.exists(filepath):
+        pass
     millis2 = int(round(time.time() * 1000))
     return(millis2 - millis1)
 
@@ -38,11 +36,9 @@ def delete_file(path, *filename):
 
 def wait_delete_file(path, *filename):
     for value in filename:
-        exit = True
         filepath = os.path.join(path, value)
-        while exit is True:
-            if not os.path.isfile(filepath):
-                exit = False
+        while os.path.exists(filepath):
+            pass
     print("Files have been deleted")
 
 
