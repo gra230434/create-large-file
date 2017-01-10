@@ -69,11 +69,11 @@ class create_files:
         return 'PASS'
 
     def CreateRandomFile(self, number=1):
-        size = round(random.uniform(0.5, 3.1), 2) * 10
         create = 1024*103
         for value in tqdm(range(int(number))):
             filename = 'rand_%d.file' % (value)
             destfile = os.path.join(self.folder, filename)
+            size = round(random.uniform(0.5, 3.1), 2) * 10
             for i in range(int(size)):
                 the_proc = multiprocessing.Process(target=writetofile,
                                                    args=((destfile), (create)))
