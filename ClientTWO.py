@@ -10,7 +10,7 @@ def wait_file_exit(filename, path):
         if os.path.isfile(path):
             exit = True
     millis2 = int(round(time.time() * 1000))
-    return(millis1 - millis2)
+    return(millis2 - millis1)
 
 
 def sys_dir_path(*path):
@@ -35,10 +35,19 @@ def delete_file(path, *filename):
             os.remove(filepath)
 
 
-def main_client_ONE():
+def wait_delete_file(path, *filename):
+    for value in filename:
+        exit = True
+        filepath = os.path.join(path, value)
+        while exit is True:
+            if not os.path.isfile(filepath):
+                exit = False
+
+
+def main_client_TWO():
     filenameONE = 'touch1.file'
     filenameTWO = 'touch2.file'
-    folderpath = sys_dir_path('home', 'cloud', '111_nfs')
+    folderpath = sys_dir_path('nfs')
     delete_file(folderpath, filenameONE, filenameTWO)
     howlong = wait_file_exit(filenameONE, folderpath)
     touch_file(filenameTWO, folderpath)
@@ -46,4 +55,4 @@ def main_client_ONE():
 
 
 if __name__ == '__main__':
-    main_client_ONE()
+    main_client_TWO()
