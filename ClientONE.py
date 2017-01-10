@@ -10,7 +10,7 @@ def wait_file_exit(filename, path):
         if os.path.isfile(path):
             exit = True
     millis2 = int(round(time.time() * 1000))
-    return(millis1 - millis2)
+    return(millis2 - millis1)
 
 
 def sys_dir_path(*path):
