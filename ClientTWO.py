@@ -23,9 +23,9 @@ def sys_dir_path(*path):
 def touch_file(filename, path):
     path = os.path.join(path, filename)
     command = 'touch %s' % (path)
-    if os.path.isfile(path):
-        print('success')
     os.system(command)
+    if os.path.isfile(path):
+        print("success")
 
 
 def delete_file(path, *filename):
@@ -33,6 +33,7 @@ def delete_file(path, *filename):
         filepath = os.path.join(path, value)
         if os.path.isfile(filepath):
             os.remove(filepath)
+    print("Delete Files")
 
 
 def wait_delete_file(path, *filename):
@@ -42,6 +43,7 @@ def wait_delete_file(path, *filename):
         while exit is True:
             if not os.path.isfile(filepath):
                 exit = False
+    print("Files have been deleted")
 
 
 def main_client_TWO():
