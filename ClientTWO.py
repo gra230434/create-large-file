@@ -48,8 +48,8 @@ def main_client_TWO():
     folderpath = sys_dir_path('nfs')
     delete_file(folderpath, filenameONE, filenameTWO)
     howlong = wait_file_exit(filenameONE, folderpath)
-    touch_file(filenameTWO, folderpath)
     print(howlong)
+    touch_file(filenameTWO, folderpath)
 
 
 if __name__ == '__main__':
